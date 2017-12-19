@@ -53,6 +53,11 @@ optional<User> UserManager::GetUser(string phone_number) {
 	return it != users_map_.end() ? make_optional(it->second) : nullopt;
 }
 
+const map<string, User> UserManager::AllUsers()
+{
+	return users_map_;
+}
+
 void UserManager::Persist() {
 
 }

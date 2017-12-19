@@ -19,6 +19,7 @@ limitations under the License.
 #include "user_options.h"
 
 #include <iostream>
+#include <optional>
 
 #include "user.h"
 #include "user_manager.h"
@@ -93,12 +94,58 @@ void UserOptions::AddUser() {
 
 void UserOptions::DisplayUser() {
 
+	cout << "Display User \n";
+
+	cin.ignore();
+
+	string phone_number;
+	cout << "PhoneNumber: ";
+	getline(cin, phone_number);
+
+	optional<User> optional_user = user_manager_.GetUser(phone_number);
+
+	if (optional_user.has_value()) {
+		User user = optional_user.value();
+		cout << user << "\n\n";
+	}
+	else {
+		cout << "Not Found. \n\n";
+	}
+
 }
 
 void UserOptions::DisplayAllUsers() {
 
+	cout << "All Users \n";
+
+	map<string,User> users_map = user_manager_.AllUsers();
+
+	for (map<string, User>::iterator it = users_map.begin(); it != users_map.end(); it++) {
+		cout << it->second << "\n";
+	}
+
+	cout << "That's All Folks. \n\n";
+
 }
 
 void UserOptions::RemoveUser() {
+
+	cout << "Remove User \n";
+
+	cin.ignore();
+
+	string phone_number;
+	cout << "PhoneNumber: ";
+	getline(cin, phone_number);
+
+	optional<User> optional_user = user_manager_.RemoveUser(phone_number);
+
+	if (optional_user.has_value()) {
+		User user = optional_user.value();
+		cout << "Deleted User: " << user << "\n\n";
+	}
+	else {
+		cout << "Not Found. \n\n";
+	}
 
 }

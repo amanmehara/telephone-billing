@@ -38,6 +38,8 @@ public:
 
 	optional<User> GetUser(string phone_number);
 
+	const map<string, User> AllUsers();
+
 	void Persist();
 
 	void Populate();
