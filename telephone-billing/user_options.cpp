@@ -22,11 +22,12 @@
 
 using namespace std;
 
-void UserOptions::Interact() {
+void UserOptions::Interact()
+{
 
 	bool loop = true;
-	while (loop) {
-
+	while (loop)
+	{
 		cout << "User Options \n";
 		cout << "1 -> Add A User \n";
 		cout << "2 -> Display A User \n";
@@ -37,7 +38,8 @@ void UserOptions::Interact() {
 		int option;
 		cin >> option;
 
-		switch (option) {
+		switch (option)
+		{
 		case 1:
 			AddUser();
 			break;
@@ -54,12 +56,11 @@ void UserOptions::Interact() {
 			loop = false;
 			break;
 		}
-
 	}
-
 }
 
-void UserOptions::AddUser() {
+void UserOptions::AddUser()
+{
 
 	cout << "Add User \n";
 
@@ -68,15 +69,15 @@ void UserOptions::AddUser() {
 	string name;
 	cout << "Name: ";
 	getline(cin, name);
-	
+
 	string phone_number;
 	cout << "PhoneNumber: ";
 	getline(cin, phone_number);
-	
+
 	string city;
 	cout << "City: ";
 	getline(cin, city);
-	
+
 	string pin_code;
 	cout << "PinCode: ";
 	getline(cin, pin_code);
@@ -88,7 +89,8 @@ void UserOptions::AddUser() {
 	cout << "User Added. \n\n";
 }
 
-void UserOptions::DisplayUser() {
+void UserOptions::DisplayUser()
+{
 
 	cout << "Display User \n";
 
@@ -100,31 +102,34 @@ void UserOptions::DisplayUser() {
 
 	optional<User> optional_user = user_manager_.GetUser(phone_number);
 
-	if (optional_user.has_value()) {
+	if (optional_user.has_value())
+	{
 		User user = optional_user.value();
 		cout << user << "\n\n";
 	}
-	else {
+	else
+	{
 		cout << "Not Found. \n\n";
 	}
-
 }
 
-void UserOptions::DisplayAllUsers() {
+void UserOptions::DisplayAllUsers()
+{
 
 	cout << "All Users \n";
 
-	map<string,User> users_map = user_manager_.AllUsers();
+	map<string, User> users_map = user_manager_.AllUsers();
 
-	for (map<string, User>::iterator it = users_map.begin(); it != users_map.end(); it++) {
+	for (map<string, User>::iterator it = users_map.begin(); it != users_map.end(); it++)
+	{
 		cout << it->second << "\n";
 	}
 
 	cout << "That's All Folks. \n\n";
-
 }
 
-void UserOptions::RemoveUser() {
+void UserOptions::RemoveUser()
+{
 
 	cout << "Remove User \n";
 
@@ -136,12 +141,13 @@ void UserOptions::RemoveUser() {
 
 	optional<User> optional_user = user_manager_.RemoveUser(phone_number);
 
-	if (optional_user.has_value()) {
+	if (optional_user.has_value())
+	{
 		User user = optional_user.value();
 		cout << "Deleted User: " << user << "\n\n";
 	}
-	else {
+	else
+	{
 		cout << "Not Found. \n\n";
 	}
-
 }

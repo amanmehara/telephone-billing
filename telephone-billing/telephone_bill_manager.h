@@ -23,16 +23,17 @@
 
 using namespace std;
 
-class TelephoneBillManager {
+class TelephoneBillManager
+{
 
 	map<string, TelephoneBill> telephone_bills_map_;
 	Rate rate_;
 
-public:
-
-	TelephoneBillManager(Rate rate) 
+  public:
+	TelephoneBillManager(Rate rate)
 		: rate_(rate)
-	{}
+	{
+	}
 
 	void AddBill(string phone_number, int incoming_calls, int outgoing_calls, double data_usage, int messages);
 
@@ -43,5 +44,4 @@ public:
 	void Persist();
 
 	void Populate();
-
 };

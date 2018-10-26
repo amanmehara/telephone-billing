@@ -19,7 +19,8 @@
 
 using namespace std;
 
-class User {
+class User
+{
 
 	string name_;
 	string phone_number_;
@@ -27,16 +28,16 @@ class User {
 	string city_;
 	string pin_code_;
 
-public:
-	
+  public:
 	User(string name, string phone_number, string city, string pin_code)
 		: name_(name), phone_number_(phone_number), city_(city), pin_code_(pin_code)
-	{}
-
-	friend ostream& operator<<(ostream& os, const User &user);
-
-	string PhoneNumber() {
-		return phone_number_;
+	{
 	}
 
+	friend ostream &operator<<(ostream &os, const User &user);
+
+	string PhoneNumber()
+	{
+		return phone_number_;
+	}
 };

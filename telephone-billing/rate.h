@@ -14,33 +14,37 @@
 
 #pragma once
 
-class Rate {
+class Rate
+{
 
 	double incoming_call_rate_;
 	double outgoing_call_rate_;
 	double data_rate_;
 	double message_rate_;
 
-public:
-
+  public:
 	Rate(double incoming_call_rate, double outgoing_call_rate, double data_rate, double message_rate)
 		: incoming_call_rate_(incoming_call_rate), outgoing_call_rate_(outgoing_call_rate), data_rate_(data_rate), message_rate_(message_rate)
-	{}
+	{
+	}
 
-	double IncomingCallRate() {
+	double IncomingCallRate()
+	{
 		return incoming_call_rate_;
 	}
 
-	double OutgoingCallRate() {
+	double OutgoingCallRate()
+	{
 		return outgoing_call_rate_;
 	}
 
-	double DataRate() {
+	double DataRate()
+	{
 		return data_rate_;
 	}
 
-	double MessageRate() {
+	double MessageRate()
+	{
 		return message_rate_;
 	}
-
 };

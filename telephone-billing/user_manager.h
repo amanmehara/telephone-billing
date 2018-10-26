@@ -22,12 +22,12 @@
 
 using namespace std;
 
-class UserManager {
+class UserManager
+{
 
 	map<string, User> users_map_;
 
-public:
-
+  public:
 	void AddUser(User &user);
 
 	optional<User> RemoveUser(string phone_number);
@@ -39,5 +39,4 @@ public:
 	void Persist();
 
 	void Populate();
-
 };

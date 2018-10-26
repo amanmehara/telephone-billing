@@ -19,16 +19,17 @@
 
 using namespace std;
 
-class UserOptions{
+class UserOptions
+{
 
 	TelephoneBillManager telephone_bill_manager_;
 	UserManager user_manager_;
 
-public:
-
+  public:
 	UserOptions(const TelephoneBillManager &telephone_bill_manager, const UserManager &user_manager)
 		: telephone_bill_manager_(telephone_bill_manager), user_manager_(user_manager)
-	{}
+	{
+	}
 
 	void Interact();
 
@@ -39,5 +40,4 @@ public:
 	void DisplayAllUsers();
 
 	void RemoveUser();
-
 };
