@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#ifndef TELBILL_USER_H_
+#define TELBILL_USER_H_
 
 #include <string>
 #include <vector>
@@ -41,3 +42,5 @@ class User
 		return phone_number_;
 	}
 };
+
+#endif // TELBILL_USER_H_

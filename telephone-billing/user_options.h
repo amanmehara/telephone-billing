@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#ifndef TELBILL_USER_OPTIONS_H_
+#define TELBILL_USER_OPTIONS_H_
 
 #include "telephone_bill_manager.h"
 #include "user_manager.h"
@@ -41,3 +42,5 @@ class UserOptions
 
 	void RemoveUser();
 };
+
+#endif // TELBILL_USER_OPTIONS_H_

@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#ifndef TELBILL_USER_MANAGER_H_
+#define TELBILL_USER_MANAGER_H_
 
 #include <map>
 #include <optional>
@@ -40,3 +41,5 @@ class UserManager
 
 	void Populate();
 };
+
+#endif // TELBILL_USER_MANAGER_H_

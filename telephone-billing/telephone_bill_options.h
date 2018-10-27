@@ -12,4 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#ifndef TELBILL_BILL_OPTIONS_H_
+#define TELBILL_BILL_OPTIONS_H_
+
+#endif // TELBILL_BILL_OPTIONS_H_

@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#ifndef TELBILL_BILL_MANAGER_H_
+#define TELBILL_BILL_MANAGER_H_
 
 #include <map>
 #include <optional>
@@ -45,3 +46,5 @@ class TelephoneBillManager
 
 	void Populate();
 };
+
+#endif // TELBILL_BILL_MANAGER_H_

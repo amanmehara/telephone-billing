@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#ifndef TELBILL_RATE_H_
+#define TELBILL_RATE_H_
 
 class Rate
 {
@@ -48,3 +49,5 @@ class Rate
 		return message_rate_;
 	}
 };
+
+#endif // TELBILL_RATE_H_

@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#ifndef TELBILL_BILL_H_
+#define TELBILL_BILL_H_
 
 #include <fstream>
 #include <string>
@@ -46,3 +47,5 @@ class TelephoneBill
 		return phone_number_;
 	}
 };
+
+#endif // TELBILL_BILL_H_
