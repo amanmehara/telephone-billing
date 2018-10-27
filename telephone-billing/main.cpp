@@ -14,9 +14,9 @@
 
 #include <iostream>
 
-#include "telephone_bill.h"
-#include "telephone_bill_manager.h"
-#include "telephone_bill_options.h"
+#include "bill.h"
+#include "bill_manager.h"
+#include "bill_options.h"
 #include "user.h"
 #include "user_manager.h"
 #include "user_options.h"

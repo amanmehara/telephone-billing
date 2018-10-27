@@ -20,7 +20,7 @@
 #include <string>
 
 #include "rate.h"
-#include "telephone_bill.h"
+#include "bill.h"
 
 using namespace std;
 

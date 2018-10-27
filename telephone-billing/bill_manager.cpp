@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "telephone_bill_manager.h"
+#include "bill_manager.h"
 
 #include <optional>
 #include <string>
 
 #include "rate.h"
-#include "telephone_bill.h"
+#include "bill.h"
 
 void TelephoneBillManager::AddBill(string phone_number, int incoming_calls, int outgoing_calls, double data_usage, int messages)
 {

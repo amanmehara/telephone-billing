@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "telephone_bill.h"
+#include "bill.h"
 
 #include "rate.h"
 

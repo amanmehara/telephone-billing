@@ -15,7 +15,7 @@
 #ifndef TELBILL_USER_OPTIONS_H_
 #define TELBILL_USER_OPTIONS_H_
 
-#include "telephone_bill_manager.h"
+#include "bill_manager.h"
 #include "user_manager.h"
 
 using namespace std;
