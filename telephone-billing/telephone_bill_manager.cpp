@@ -17,6 +17,7 @@
 #include <optional>
 #include <string>
 
+#include "rate.h"
 #include "telephone_bill.h"
 
 void TelephoneBillManager::AddBill(string phone_number, int incoming_calls, int outgoing_calls, double data_usage, int messages)
