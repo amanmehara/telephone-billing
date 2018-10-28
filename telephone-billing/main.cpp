@@ -44,20 +44,19 @@ void shutdown()
 
 int main()
 {
-
 	Rate rate(0, 0, 0, 0);
 	initialize(rate);
 
 	bool loop = true;
 	while (loop)
 	{
-		cout << "Telephone Billing \n";
-		cout << "1 -> User \n";
-		cout << "2 -> Telephone Bill \n";
-		cout << "_ -> Exit \n";
+		std::cout << "Telephone Billing \n";
+		std::cout << "1 -> User \n";
+		std::cout << "2 -> Telephone Bill \n";
+		std::cout << "_ -> Exit \n";
 
 		int option;
-		cin >> option;
+		std::cin >> option;
 
 		switch (option)
 		{

@@ -18,26 +18,23 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class User
 {
-
-	string name_;
-	string phone_number_;
+	std::string name_;
+	std::string phone_number_;
 	double due_;
-	string city_;
-	string pin_code_;
+	std::string city_;
+	std::string pin_code_;
 
   public:
-	User(string name, string phone_number, string city, string pin_code)
+	User(std::string name, std::string phone_number, std::string city, std::string pin_code)
 		: name_(name), phone_number_(phone_number), city_(city), pin_code_(pin_code)
 	{
 	}
 
-	friend ostream &operator<<(ostream &os, const User &user);
+	friend std::ostream &operator<<(std::ostream &os, const User &user);
 
-	string PhoneNumber()
+	std::string PhoneNumber()
 	{
 		return phone_number_;
 	}

@@ -19,41 +19,38 @@
 
 #include "user.h"
 
-using namespace std;
-
 void UserManager::AddUser(User &user)
 {
-
-	string phone_number = user.PhoneNumber();
+	std::string phone_number = user.PhoneNumber();
 	if (users_map_.find(phone_number) != users_map_.end())
 	{
-		throw runtime_error("User already there.");
+		throw std::runtime_error("User already there.");
 	}
-	users_map_.insert(make_pair<>(phone_number, user));
+	users_map_.insert(std::make_pair<>(phone_number, user));
 }
 
-optional<User> UserManager::RemoveUser(string phone_number)
+std::optional<User> UserManager::RemoveUser(std::string phone_number)
 {
-	map<string, User>::iterator it = users_map_.find(phone_number);
+	std::map<std::string, User>::iterator it = users_map_.find(phone_number);
 	if (it != users_map_.end())
 	{
 		User user = it->second;
 		users_map_.erase(it);
-		return make_optional(user);
+		return std::make_optional(user);
 	}
 	else
 	{
-		return nullopt;
+		return std::nullopt;
 	}
 }
 
-optional<User> UserManager::GetUser(string phone_number)
+std::optional<User> UserManager::GetUser(std::string phone_number)
 {
-	map<string, User>::iterator it = users_map_.find(phone_number);
-	return it != users_map_.end() ? make_optional(it->second) : nullopt;
+	std::map<std::string, User>::iterator it = users_map_.find(phone_number);
+	return it != users_map_.end() ? std::make_optional(it->second) : std::nullopt;
 }
 
-const map<string, User> UserManager::AllUsers()
+const std::map<std::string, User> UserManager::AllUsers()
 {
 	return users_map_;
 }

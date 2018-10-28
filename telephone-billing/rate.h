@@ -17,7 +17,6 @@
 
 class Rate
 {
-
 	double incoming_call_rate_;
 	double outgoing_call_rate_;
 	double data_rate_;

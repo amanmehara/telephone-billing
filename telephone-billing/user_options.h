@@ -18,11 +18,8 @@
 #include "bill_manager.h"
 #include "user_manager.h"
 
-using namespace std;
-
 class UserOptions
 {
-
 	TelephoneBillManager telephone_bill_manager_;
 	UserManager user_manager_;
 

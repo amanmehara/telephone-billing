@@ -21,21 +21,18 @@
 
 #include "user.h"
 
-using namespace std;
-
 class UserManager
 {
-
-	map<string, User> users_map_;
+	std::map<std::string, User> users_map_;
 
   public:
 	void AddUser(User &user);
 
-	optional<User> RemoveUser(string phone_number);
+	std::optional<User> RemoveUser(std::string phone_number);
 
-	optional<User> GetUser(string phone_number);
+	std::optional<User> GetUser(std::string phone_number);
 
-	const map<string, User> AllUsers();
+	const std::map<std::string, User> AllUsers();
 
 	void Persist();
 

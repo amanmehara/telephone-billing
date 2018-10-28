@@ -20,23 +20,20 @@
 #include "user.h"
 #include "user_manager.h"
 
-using namespace std;
-
 void UserOptions::Interact()
 {
-
 	bool loop = true;
 	while (loop)
 	{
-		cout << "User Options \n";
-		cout << "1 -> Add A User \n";
-		cout << "2 -> Display A User \n";
-		cout << "3 -> Display All Users \n";
-		cout << "4 -> Remove A User \n";
-		cout << "_ -> Back to Home \n";
+		std::cout << "User Options \n";
+		std::cout << "1 -> Add A User \n";
+		std::cout << "2 -> Display A User \n";
+		std::cout << "3 -> Display All Users \n";
+		std::cout << "4 -> Remove A User \n";
+		std::cout << "_ -> Back to Home \n";
 
 		int option;
-		cin >> option;
+		std::cin >> option;
 
 		switch (option)
 		{
@@ -62,92 +59,89 @@ void UserOptions::Interact()
 void UserOptions::AddUser()
 {
 
-	cout << "Add User \n";
+	std::cout << "Add User \n";
 
-	cin.ignore();
+	std::cin.ignore();
 
-	string name;
-	cout << "Name: ";
-	getline(cin, name);
+	std::string name;
+	std::cout << "Name: ";
+	getline(std::cin, name);
 
-	string phone_number;
-	cout << "PhoneNumber: ";
-	getline(cin, phone_number);
+	std::string phone_number;
+	std::cout << "PhoneNumber: ";
+	getline(std::cin, phone_number);
 
-	string city;
-	cout << "City: ";
-	getline(cin, city);
+	std::string city;
+	std::cout << "City: ";
+	getline(std::cin, city);
 
-	string pin_code;
-	cout << "PinCode: ";
-	getline(cin, pin_code);
+	std::string pin_code;
+	std::cout << "PinCode: ";
+	getline(std::cin, pin_code);
 
 	User user(name, phone_number, city, pin_code);
 
 	user_manager_.AddUser(user);
 
-	cout << "User Added. \n\n";
+	std::cout << "User Added. \n\n";
 }
 
 void UserOptions::DisplayUser()
 {
+	std::cout << "Display User \n";
 
-	cout << "Display User \n";
+	std::cin.ignore();
 
-	cin.ignore();
+	std::string phone_number;
+	std::cout << "PhoneNumber: ";
+	getline(std::cin, phone_number);
 
-	string phone_number;
-	cout << "PhoneNumber: ";
-	getline(cin, phone_number);
-
-	optional<User> optional_user = user_manager_.GetUser(phone_number);
+	std::optional<User> optional_user = user_manager_.GetUser(phone_number);
 
 	if (optional_user.has_value())
 	{
 		User user = optional_user.value();
-		cout << user << "\n\n";
+		std::cout << user << "\n\n";
 	}
 	else
 	{
-		cout << "Not Found. \n\n";
+		std::cout << "Not Found. \n\n";
 	}
 }
 
 void UserOptions::DisplayAllUsers()
 {
+	std::cout << "All Users \n";
 
-	cout << "All Users \n";
+	std::map<std::string, User> users_map = user_manager_.AllUsers();
 
-	map<string, User> users_map = user_manager_.AllUsers();
-
-	for (map<string, User>::iterator it = users_map.begin(); it != users_map.end(); it++)
+	for (std::map<std::string, User>::iterator it = users_map.begin(); it != users_map.end(); it++)
 	{
-		cout << it->second << "\n";
+		std::cout << it->second << "\n";
 	}
 
-	cout << "That's All Folks. \n\n";
+	std::cout << "That's All Folks. \n\n";
 }
 
 void UserOptions::RemoveUser()
 {
+	std::cout << "Remove User \n";
 
-	cout << "Remove User \n";
+	std::cin.ignore();
 
-	cin.ignore();
+	std::string phone_number;
+	std::cout << "PhoneNumber: ";
+	getline(std::cin, phone_number);
 
-	string phone_number;
-	cout << "PhoneNumber: ";
-	getline(cin, phone_number);
-
-	optional<User> optional_user = user_manager_.RemoveUser(phone_number);
+	std::optional<User> optional_user = user_manager_.RemoveUser(phone_number);
 
 	if (optional_user.has_value())
 	{
 		User user = optional_user.value();
-		cout << "Deleted User: " << user << "\n\n";
+		std::cout << "Deleted User: " << user << "\n\n";
 	}
 	else
 	{
-		cout << "Not Found. \n\n";
+		std::cout << "Not Found. \n\n";
 	}
 }
