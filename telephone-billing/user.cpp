@@ -14,8 +14,15 @@
 
 #include "user.h"
 
+#include <iostream>
+#include <string>
+
 ostream &operator<<(ostream &os, const User &user)
 {
-	os << "{\"Name\":\"" << user.name_ << "\",\"PhoneNumber\":\"" << user.phone_number_ << "\",\"City:\"" << user.city_ << "\",\"PinCode\":\"" << user.pin_code_ << "\"}";
+	os << string("{\"Name\":\"") << user.name_
+	   << string("\",\"PhoneNumber\":\"") << user.phone_number_
+	   << string("\",\"City\":\"") << user.city_
+	   << string("\",\"PinCode\":\"") << user.pin_code_
+	   << string("\"}");
 	return os;
 }
