@@ -16,7 +16,7 @@
 
 #include "rate.h"
 
-void TelephoneBill::ComputeBill()
+void Bill::ComputeBill()
 {
-	bill_amount_ = incoming_calls_ * rate_.IncomingCallRate() + outgoing_calls_ * rate_.OutgoingCallRate() + data_usage_ * rate_.DataRate() + messages_ * rate_.MessageRate();
+	bill_amount_ = calls_ * rate_.CallRate() + data_ * rate_.DataRate() + messages_ * rate_.MessageRate();
 }

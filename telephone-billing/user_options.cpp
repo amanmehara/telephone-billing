@@ -75,11 +75,7 @@ void UserOptions::AddUser()
 	std::cout << "City: ";
 	getline(std::cin, city);
 
-	std::string pin_code;
-	std::cout << "PinCode: ";
-	getline(std::cin, pin_code);
-
-	User user(name, phone_number, city, pin_code);
+	User user(name, phone_number, city);
 
 	user_manager_.AddUser(user);
 

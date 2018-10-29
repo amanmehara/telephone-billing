@@ -20,23 +20,23 @@
 #include "rate.h"
 #include "bill.h"
 
-void TelephoneBillManager::AddBill(std::string phone_number, int incoming_calls, int outgoing_calls, double data_usage, int messages)
+void BillManager::AddBill(std::string phone_number, int calls, double data, int messages)
 {
-	if (telephone_bills_map_.find(phone_number) != telephone_bills_map_.end())
+	if (bills_map_.find(phone_number) != bills_map_.end())
 	{
 		throw std::runtime_error("Bill already there.");
 	}
-	telephone_bills_map_.insert(std::make_pair<>(phone_number, TelephoneBill(phone_number, incoming_calls, outgoing_calls, data_usage, messages, rate_)));
+	bills_map_.insert(std::make_pair<>(phone_number, Bill(phone_number, calls, data, messages, rate_)));
 }
 
-std::optional<TelephoneBill> TelephoneBillManager::RemoveTelephoneBill(std::string phone_number)
+std::optional<Bill> BillManager::RemoveBill(std::string phone_number)
 {
-	std::map<std::string, TelephoneBill>::iterator it = telephone_bills_map_.find(phone_number);
-	if (it != telephone_bills_map_.end())
+	std::map<std::string, Bill>::iterator it = bills_map_.find(phone_number);
+	if (it != bills_map_.end())
 	{
-		TelephoneBill telephone_bill = it->second;
-		telephone_bills_map_.erase(it);
-		return std::make_optional(telephone_bill);
+		Bill bill = it->second;
+		bills_map_.erase(it);
+		return std::make_optional(bill);
 	}
 	else
 	{
@@ -44,16 +44,18 @@ std::optional<TelephoneBill> TelephoneBillManager::RemoveTelephoneBill(std::stri
 	}
 }
 
-std::optional<TelephoneBill> TelephoneBillManager::GetTelephoneBill(std::string phone_number)
+std::optional<Bill> BillManager::GetBill(std::string phone_number)
 {
-	std::map<std::string, TelephoneBill>::iterator it = telephone_bills_map_.find(phone_number);
-	return it != telephone_bills_map_.end() ? std::make_optional(it->second) : std::nullopt;
+	std::map<std::string, Bill>::iterator it = bills_map_.find(phone_number);
+	return it != bills_map_.end()
+			   ? std::make_optional(it->second)
+			   : std::nullopt;
 }
 
-void TelephoneBillManager::Persist()
+void BillManager::Persist()
 {
 }
 
-void TelephoneBillManager::Populate()
+void BillManager::Populate()
 {
 }

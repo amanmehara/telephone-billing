@@ -22,15 +22,15 @@
 #include "user_options.h"
 
 UserManager *user_manager_;
-TelephoneBillManager *telephone_bill_manager_;
+BillManager *bill_manager_;
 
 void initialize(Rate rate)
 {
 	user_manager_ = new UserManager();
 	user_manager_->Populate();
 
-	telephone_bill_manager_ = new TelephoneBillManager(rate);
-	telephone_bill_manager_->Populate();
+	bill_manager_ = new BillManager(rate);
+	bill_manager_->Populate();
 }
 
 void shutdown()
@@ -38,13 +38,13 @@ void shutdown()
 	user_manager_->Persist();
 	delete (user_manager_);
 
-	telephone_bill_manager_->Persist();
-	delete (telephone_bill_manager_);
+	bill_manager_->Persist();
+	delete (bill_manager_);
 }
 
 int main()
 {
-	Rate rate(0, 0, 0, 0);
+	Rate rate(0, 0, 0);
 	initialize(rate);
 
 	bool loop = true;
@@ -52,7 +52,7 @@ int main()
 	{
 		std::cout << "Telephone Billing \n";
 		std::cout << "1 -> User \n";
-		std::cout << "2 -> Telephone Bill \n";
+		std::cout << "2 -> Bill \n";
 		std::cout << "_ -> Exit \n";
 
 		int option;
@@ -61,7 +61,7 @@ int main()
 		switch (option)
 		{
 		case 1:
-			UserOptions(*telephone_bill_manager_, *user_manager_).Interact();
+			UserOptions(*bill_manager_, *user_manager_).Interact();
 			break;
 		case 2:
 			break;

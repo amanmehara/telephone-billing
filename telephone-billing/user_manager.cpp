@@ -47,7 +47,9 @@ std::optional<User> UserManager::RemoveUser(std::string phone_number)
 std::optional<User> UserManager::GetUser(std::string phone_number)
 {
 	std::map<std::string, User>::iterator it = users_map_.find(phone_number);
-	return it != users_map_.end() ? std::make_optional(it->second) : std::nullopt;
+	return it != users_map_.end()
+			   ? std::make_optional(it->second)
+			   : std::nullopt;
 }
 
 const std::map<std::string, User> UserManager::AllUsers()

@@ -20,12 +20,12 @@
 
 class UserOptions
 {
-	TelephoneBillManager telephone_bill_manager_;
+	BillManager bill_manager_;
 	UserManager user_manager_;
 
   public:
-	UserOptions(const TelephoneBillManager &telephone_bill_manager, const UserManager &user_manager)
-		: telephone_bill_manager_(telephone_bill_manager), user_manager_(user_manager)
+	UserOptions(const BillManager &bill_manager, const UserManager &user_manager)
+		: bill_manager_(bill_manager), user_manager_(user_manager)
 	{
 	}
 

@@ -24,11 +24,10 @@ class User
 	std::string phone_number_;
 	double due_;
 	std::string city_;
-	std::string pin_code_;
 
   public:
-	User(std::string name, std::string phone_number, std::string city, std::string pin_code)
-		: name_(name), phone_number_(phone_number), city_(city), pin_code_(pin_code)
+	User(std::string name, std::string phone_number, std::string city)
+		: name_(name), phone_number_(phone_number), city_(city)
 	{
 	}
 

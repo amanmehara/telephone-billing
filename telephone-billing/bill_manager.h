@@ -22,22 +22,22 @@
 #include "rate.h"
 #include "bill.h"
 
-class TelephoneBillManager
+class BillManager
 {
-	std::map<std::string, TelephoneBill> telephone_bills_map_;
+	std::map<std::string, Bill> bills_map_;
 	Rate rate_;
 
   public:
-	TelephoneBillManager(Rate rate)
+	BillManager(Rate rate)
 		: rate_(rate)
 	{
 	}
 
-	void AddBill(std::string phone_number, int incoming_calls, int outgoing_calls, double data_usage, int messages);
+	void AddBill(std::string phone_number, int calls, double data_usage, int messages);
 
-	std::optional<TelephoneBill> RemoveTelephoneBill(std::string phone_number);
+	std::optional<Bill> RemoveBill(std::string phone_number);
 
-	std::optional<TelephoneBill> GetTelephoneBill(std::string phone_number);
+	std::optional<Bill> GetBill(std::string phone_number);
 
 	void Persist();
 

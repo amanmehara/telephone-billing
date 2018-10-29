@@ -22,7 +22,6 @@ std::ostream &operator<<(std::ostream &os, const User &user)
 	os << std::string("{\"Name\":\"") << user.name_
 	   << std::string("\",\"PhoneNumber\":\"") << user.phone_number_
 	   << std::string("\",\"City\":\"") << user.city_
-	   << std::string("\",\"PinCode\":\"") << user.pin_code_
 	   << std::string("\"}");
 	return os;
 }
