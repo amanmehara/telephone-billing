@@ -32,21 +32,21 @@ void UserOptions::Interact()
 		std::cout << "4 -> Remove A User \n";
 		std::cout << "_ -> Back to Home \n";
 
-		int option;
+		char option;
 		std::cin >> option;
 
 		switch (option)
 		{
-		case 1:
+		case '1':
 			AddUser();
 			break;
-		case 2:
+		case '2':
 			DisplayUser();
 			break;
-		case 3:
+		case '3':
 			DisplayAllUsers();
 			break;
-		case 4:
+		case '4':
 			RemoveUser();
 			break;
 		default:

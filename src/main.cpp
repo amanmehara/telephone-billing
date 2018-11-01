@@ -55,15 +55,15 @@ int main()
 		std::cout << "2 -> Bill \n";
 		std::cout << "_ -> Exit \n";
 
-		int option;
+		char option;
 		std::cin >> option;
 
 		switch (option)
 		{
-		case 1:
+		case '1':
 			UserOptions(*bill_manager_, *user_manager_).Interact();
 			break;
-		case 2:
+		case '2':
 			break;
 		default:
 			loop = false;
