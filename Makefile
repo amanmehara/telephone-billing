@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 CXX ::= g++
-CXXFLAGS ::= -std=c++17
+CXXFLAGS ::= -g -std=c++17
 
 srcdir ::= ./src
 objdir ::= ./obj
