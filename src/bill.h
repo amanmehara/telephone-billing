@@ -23,13 +23,6 @@
 
 class Bill
 {
-	std::string phone_number_;
-	int calls_;
-	double data_;
-	int messages_;
-	double bill_amount_;
-	Rate rate_;
-
   public:
 	Bill(std::string phone_number, int calls, double data, int messages, Rate rate)
 		: phone_number_(phone_number), calls_(calls), data_(data), messages_(messages), rate_(rate)
@@ -42,6 +35,14 @@ class Bill
 	{
 		return phone_number_;
 	}
+
+  private:
+	std::string phone_number_;
+	int calls_;
+	double data_;
+	int messages_;
+	double bill_amount_;
+	Rate rate_;
 };
 
 #endif // TELBILL_BILL_H_

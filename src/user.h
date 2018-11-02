@@ -20,11 +20,6 @@
 
 class User
 {
-	std::string name_;
-	std::string phone_number_;
-	double due_;
-	std::string city_;
-
   public:
 	User(std::string name, std::string phone_number, std::string city)
 		: name_(name), phone_number_(phone_number), city_(city)
@@ -37,6 +32,12 @@ class User
 	{
 		return phone_number_;
 	}
+
+  private:
+	std::string name_;
+	std::string phone_number_;
+	double due_;
+	std::string city_;
 };
 
 #endif // TELBILL_USER_H_

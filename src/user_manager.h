@@ -23,8 +23,6 @@
 
 class UserManager
 {
-	std::map<std::string, User> users_map_;
-
   public:
 	void AddUser(User &user);
 
@@ -37,6 +35,9 @@ class UserManager
 	void Persist();
 
 	void Populate();
+
+  private:
+	std::map<std::string, User> users_map_;
 };
 
 #endif // TELBILL_USER_MANAGER_H_

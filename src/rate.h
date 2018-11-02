@@ -17,10 +17,6 @@
 
 class Rate
 {
-	double call_rate_;
-	double data_rate_;
-	double message_rate_;
-
   public:
 	Rate(double call_rate, double data_rate, double message_rate)
 		: call_rate_(call_rate), data_rate_(data_rate), message_rate_(message_rate)
@@ -41,6 +37,11 @@ class Rate
 	{
 		return message_rate_;
 	}
+
+  private:
+	double call_rate_;
+	double data_rate_;
+	double message_rate_;
 };
 
 #endif // TELBILL_RATE_H_

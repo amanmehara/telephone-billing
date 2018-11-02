@@ -20,9 +20,6 @@
 
 class UserOptions
 {
-	BillManager bill_manager_;
-	UserManager user_manager_;
-
   public:
 	UserOptions(const BillManager &bill_manager, const UserManager &user_manager)
 		: bill_manager_(bill_manager), user_manager_(user_manager)
@@ -38,6 +35,10 @@ class UserOptions
 	void DisplayAllUsers();
 
 	void RemoveUser();
+
+  private:
+	BillManager bill_manager_;
+	UserManager user_manager_;
 };
 
 #endif // TELBILL_USER_OPTIONS_H_

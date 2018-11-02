@@ -24,9 +24,6 @@
 
 class BillManager
 {
-	std::map<std::string, Bill> bills_map_;
-	Rate rate_;
-
   public:
 	BillManager(Rate rate)
 		: rate_(rate)
@@ -42,6 +39,10 @@ class BillManager
 	void Persist();
 
 	void Populate();
+
+  private:
+	std::map<std::string, Bill> bills_map_;
+	Rate rate_;
 };
 
 #endif // TELBILL_BILL_MANAGER_H_
