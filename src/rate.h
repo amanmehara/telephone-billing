@@ -15,33 +15,28 @@
 #ifndef TELBILL_RATE_H_
 #define TELBILL_RATE_H_
 
-class Rate
-{
+class rate {
   public:
-	Rate(double call_rate, double data_rate, double message_rate)
-		: call_rate_(call_rate), data_rate_(data_rate), message_rate_(message_rate)
-	{
-	}
+    rate(double call_rate, double data_rate, double message_rate)
+        : call_rate_(call_rate), data_rate_(data_rate), message_rate_(message_rate) {
+    }
 
-	double CallRate()
-	{
-		return call_rate_;
-	}
+    double call_rate() {
+        return call_rate_;
+    }
 
-	double DataRate()
-	{
-		return data_rate_;
-	}
+    double data_rate() {
+        return data_rate_;
+    }
 
-	double MessageRate()
-	{
-		return message_rate_;
-	}
+    double message_rate() {
+        return message_rate_;
+    }
 
   private:
-	double call_rate_;
-	double data_rate_;
-	double message_rate_;
+    double call_rate_;
+    double data_rate_;
+    double message_rate_;
 };
 
 #endif // TELBILL_RATE_H_

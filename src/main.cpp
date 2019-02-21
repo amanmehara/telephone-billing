@@ -15,63 +15,58 @@
 #include <iostream>
 
 #include "bill.h"
-#include "bill_manager.h"
 #include "bill_options.h"
+#include "bill_service.h"
 #include "user.h"
-#include "user_manager.h"
 #include "user_options.h"
+#include "user_service.h"
 
-UserManager *user_manager_;
-BillManager *bill_manager_;
+user_service* user_service_;
+bill_service* bill_service_;
 
-void initialize(Rate rate)
-{
-	user_manager_ = new UserManager();
-	user_manager_->Populate();
+void initialize(rate rate) {
+    user_service_ = new user_service();
+    user_service_->populate();
 
-	bill_manager_ = new BillManager(rate);
-	bill_manager_->Populate();
+    bill_service_ = new bill_service(rate);
+    bill_service_->populate();
 }
 
-void shutdown()
-{
-	user_manager_->Persist();
-	delete (user_manager_);
+void shutdown() {
+    user_service_->persist();
+    delete (user_service_);
 
-	bill_manager_->Persist();
-	delete (bill_manager_);
+    bill_service_->persist();
+    delete (bill_service_);
 }
 
-int main()
-{
-	Rate rate(0, 0, 0);
-	initialize(rate);
+int main() {
+    rate rate(0, 0, 0);
+    initialize(rate);
 
-	bool loop = true;
-	while (loop)
-	{
-		std::cout << "Telephone Billing \n";
-		std::cout << "1 -> User \n";
-		std::cout << "2 -> Bill \n";
-		std::cout << "_ -> Exit \n";
+    bool loop = true;
+    while (loop) {
+        std::cout << "Telephone Billing \n";
+        std::cout << "1 -> User \n";
+        std::cout << "2 -> Bill \n";
+        std::cout << "_ -> Exit \n";
 
-		char option;
-		std::cin >> option;
+        char option;
+        std::cin >> option;
 
-		switch (option)
-		{
-		case '1':
-			UserOptions(*bill_manager_, *user_manager_).Interact();
-			break;
-		case '2':
-			break;
-		default:
-			loop = false;
-			break;
-		}
-	}
+        switch (option) {
+        case '1':
+            user_options(*bill_service_, *user_service_).interact();
+            break;
+        case '2':
+            break;
+        default:
+            loop = false;
+            break;
+        }
+    }
 
-	shutdown();
+    shutdown();
 
-	return 0;
+    return 0;
 }

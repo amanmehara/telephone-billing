@@ -17,11 +17,10 @@
 #include <iostream>
 #include <string>
 
-std::ostream &operator<<(std::ostream &os, const User &user)
-{
-	os << std::string("{\"Name\":\"") << user.name_
-	   << std::string("\",\"PhoneNumber\":\"") << user.phone_number_
-	   << std::string("\",\"City\":\"") << user.city_
-	   << std::string("\"}");
-	return os;
+std::ostream& operator<<(std::ostream& os, const user& user) {
+    os << std::string("{\"Name\":\"") << user.name_
+       << std::string("\",\"PhoneNumber\":\"") << user.phone_number_
+       << std::string("\",\"City\":\"") << user.city_
+       << std::string("\"}");
+    return os;
 }

@@ -16,7 +16,6 @@
 
 #include "rate.h"
 
-void Bill::ComputeBill()
-{
-	bill_amount_ = calls_ * rate_.CallRate() + data_ * rate_.DataRate() + messages_ * rate_.MessageRate();
+void bill::compute_bill() {
+    bill_amount_ = calls_ * rate_.call_rate() + data_ * rate_.data_rate() + messages_ * rate_.message_rate();
 }

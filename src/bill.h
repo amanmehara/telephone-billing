@@ -21,28 +21,25 @@
 
 #include "rate.h"
 
-class Bill
-{
+class bill {
   public:
-	Bill(std::string phone_number, int calls, double data, int messages, Rate rate)
-		: phone_number_(phone_number), calls_(calls), data_(data), messages_(messages), rate_(rate)
-	{
-	}
+    bill(std::string phone_number, int calls, double data, int messages, rate rate)
+        : phone_number_(phone_number), calls_(calls), data_(data), messages_(messages), rate_(rate) {
+    }
 
-	void ComputeBill();
+    void compute_bill();
 
-	std::string PhoneNumber()
-	{
-		return phone_number_;
-	}
+    std::string phone_number() {
+        return phone_number_;
+    }
 
   private:
-	std::string phone_number_;
-	int calls_;
-	double data_;
-	int messages_;
-	double bill_amount_;
-	Rate rate_;
+    std::string phone_number_;
+    int calls_;
+    double data_;
+    int messages_;
+    double bill_amount_;
+    rate rate_;
 };
 
 #endif // TELBILL_BILL_H_

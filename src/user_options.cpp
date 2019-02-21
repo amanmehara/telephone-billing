@@ -18,126 +18,112 @@
 #include <optional>
 
 #include "user.h"
-#include "user_manager.h"
+#include "user_service.h"
 
-void UserOptions::Interact()
-{
-	bool loop = true;
-	while (loop)
-	{
-		std::cout << "User Options \n";
-		std::cout << "1 -> Add A User \n";
-		std::cout << "2 -> Display A User \n";
-		std::cout << "3 -> Display All Users \n";
-		std::cout << "4 -> Remove A User \n";
-		std::cout << "_ -> Back to Home \n";
+void user_options::interact() {
+    bool loop = true;
+    while (loop) {
+        std::cout << "User Options \n";
+        std::cout << "1 -> Add A User \n";
+        std::cout << "2 -> Display A User \n";
+        std::cout << "3 -> Display All Users \n";
+        std::cout << "4 -> Remove A User \n";
+        std::cout << "_ -> Back to Home \n";
 
-		char option;
-		std::cin >> option;
+        char option;
+        std::cin >> option;
 
-		switch (option)
-		{
-		case '1':
-			AddUser();
-			break;
-		case '2':
-			DisplayUser();
-			break;
-		case '3':
-			DisplayAllUsers();
-			break;
-		case '4':
-			RemoveUser();
-			break;
-		default:
-			loop = false;
-			break;
-		}
-	}
+        switch (option) {
+        case '1':
+            add_user();
+            break;
+        case '2':
+            display_user();
+            break;
+        case '3':
+            display_all_users();
+            break;
+        case '4':
+            remove_user();
+            break;
+        default:
+            loop = false;
+            break;
+        }
+    }
 }
 
-void UserOptions::AddUser()
-{
+void user_options::add_user() {
 
-	std::cout << "Add User \n";
+    std::cout << "Add User \n";
 
-	std::cin.ignore();
+    std::cin.ignore();
 
-	std::string name;
-	std::cout << "Name: ";
-	getline(std::cin, name);
+    std::string name;
+    std::cout << "Name: ";
+    getline(std::cin, name);
 
-	std::string phone_number;
-	std::cout << "PhoneNumber: ";
-	getline(std::cin, phone_number);
+    std::string phone_number;
+    std::cout << "PhoneNumber: ";
+    getline(std::cin, phone_number);
 
-	std::string city;
-	std::cout << "City: ";
-	getline(std::cin, city);
+    std::string city;
+    std::cout << "City: ";
+    getline(std::cin, city);
 
-	User user(name, phone_number, city);
+    user user(name, phone_number, city);
 
-	user_manager_.AddUser(user);
+    user_service_.add_user(user);
 
-	std::cout << "User Added. \n\n";
+    std::cout << "User Added. \n\n";
 }
 
-void UserOptions::DisplayUser()
-{
-	std::cout << "Display User \n";
+void user_options::display_user() {
+    std::cout << "Display User \n";
 
-	std::cin.ignore();
+    std::cin.ignore();
 
-	std::string phone_number;
-	std::cout << "PhoneNumber: ";
-	getline(std::cin, phone_number);
+    std::string phone_number;
+    std::cout << "PhoneNumber: ";
+    getline(std::cin, phone_number);
 
-	std::optional<User> optional_user = user_manager_.GetUser(phone_number);
+    std::optional<user> optional_user = user_service_.get_user(phone_number);
 
-	if (optional_user.has_value())
-	{
-		User user = optional_user.value();
-		std::cout << user << "\n\n";
-	}
-	else
-	{
-		std::cout << "Not Found. \n\n";
-	}
+    if (optional_user.has_value()) {
+        user user = optional_user.value();
+        std::cout << user << "\n\n";
+    } else {
+        std::cout << "Not Found. \n\n";
+    }
 }
 
-void UserOptions::DisplayAllUsers()
-{
-	std::cout << "All Users \n";
+void user_options::display_all_users() {
+    std::cout << "All Users \n";
 
-	std::map<std::string, User> users_map = user_manager_.AllUsers();
+    std::map<std::string, user> users_map = user_service_.all_users();
 
-	for (std::map<std::string, User>::iterator it = users_map.begin(); it != users_map.end(); it++)
-	{
-		std::cout << it->second << "\n";
-	}
+    for (std::map<std::string, user>::iterator it = users_map.begin(); it != users_map.end(); it++) {
+        std::cout << it->second << "\n";
+    }
 
-	std::cout << "That's All Folks. \n\n";
+    std::cout << "That's All Folks. \n\n";
 }
 
-void UserOptions::RemoveUser()
-{
-	std::cout << "Remove User \n";
+void user_options::remove_user() {
+    std::cout << "Remove User \n";
 
-	std::cin.ignore();
+    std::cin.ignore();
 
-	std::string phone_number;
-	std::cout << "PhoneNumber: ";
-	getline(std::cin, phone_number);
+    std::string phone_number;
+    std::cout << "PhoneNumber: ";
+    getline(std::cin, phone_number);
 
-	std::optional<User> optional_user = user_manager_.RemoveUser(phone_number);
+    std::optional<user> optional_user = user_service_.remove_user(phone_number);
 
-	if (optional_user.has_value())
-	{
-		User user = optional_user.value();
-		std::cout << "Deleted User: " << user << "\n\n";
-	}
-	else
-	{
-		std::cout << "Not Found. \n\n";
-	}
+    if (optional_user.has_value()) {
+        user user = optional_user.value();
+        std::cout << "Deleted User: " << user << "\n\n";
+    } else {
+        std::cout << "Not Found. \n\n";
+    }
 }

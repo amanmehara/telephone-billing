@@ -12,32 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef TELBILL_USER_MANAGER_H_
-#define TELBILL_USER_MANAGER_H_
+#ifndef TELBILL_BILL_SERVICE_H_
+#define TELBILL_BILL_SERVICE_H_
 
 #include <map>
 #include <optional>
 #include <string>
 
-#include "user.h"
+#include "bill.h"
+#include "rate.h"
 
-class UserManager
-{
+class bill_service {
   public:
-	void AddUser(User &user);
+    bill_service(rate rate)
+        : rate_(rate) {
+    }
 
-	std::optional<User> RemoveUser(std::string phone_number);
+    void add_bill(std::string phone_number, int calls, double data_usage, int messages);
 
-	std::optional<User> GetUser(std::string phone_number);
+    std::optional<bill> remove_bill(std::string phone_number);
 
-	const std::map<std::string, User> AllUsers();
+    std::optional<bill> get_bill(std::string phone_number);
 
-	void Persist();
+    void persist();
 
-	void Populate();
+    void populate();
 
   private:
-	std::map<std::string, User> users_map_;
+    std::map<std::string, bill> bills_map_;
+    rate rate_;
 };
 
-#endif // TELBILL_USER_MANAGER_H_
+#endif // TELBILL_BILL_SERVICE_H_

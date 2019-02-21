@@ -15,30 +15,28 @@
 #ifndef TELBILL_USER_OPTIONS_H_
 #define TELBILL_USER_OPTIONS_H_
 
-#include "bill_manager.h"
-#include "user_manager.h"
+#include "bill_service.h"
+#include "user_service.h"
 
-class UserOptions
-{
+class user_options {
   public:
-	UserOptions(const BillManager &bill_manager, const UserManager &user_manager)
-		: bill_manager_(bill_manager), user_manager_(user_manager)
-	{
-	}
+    user_options(const bill_service& bill_service, const user_service& user_service)
+        : bill_service_(bill_service), user_service_(user_service) {
+    }
 
-	void Interact();
+    void interact();
 
-	void AddUser();
+    void add_user();
 
-	void DisplayUser();
+    void display_user();
 
-	void DisplayAllUsers();
+    void display_all_users();
 
-	void RemoveUser();
+    void remove_user();
 
   private:
-	BillManager bill_manager_;
-	UserManager user_manager_;
+    bill_service bill_service_;
+    user_service user_service_;
 };
 
 #endif // TELBILL_USER_OPTIONS_H_
