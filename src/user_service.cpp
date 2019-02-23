@@ -48,9 +48,3 @@ std::optional<user> user_service::get_user(std::string phone_number) {
 const std::map<std::string, user> user_service::all_users() {
     return users_map_;
 }
-
-void user_service::persist() {
-}
-
-void user_service::populate() {
-}

@@ -34,10 +34,6 @@ class bill_service {
 
     std::optional<bill> get_bill(std::string phone_number);
 
-    void persist();
-
-    void populate();
-
   private:
     std::map<std::string, bill> bills_map_;
     rate rate_;

@@ -31,10 +31,6 @@ class user_service {
 
     const std::map<std::string, user> all_users();
 
-    void persist();
-
-    void populate();
-
   private:
     std::map<std::string, user> users_map_;
 };

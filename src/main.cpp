@@ -26,17 +26,11 @@ bill_service* bill_service_;
 
 void initialize(rate rate) {
     user_service_ = new user_service();
-    user_service_->populate();
-
     bill_service_ = new bill_service(rate);
-    bill_service_->populate();
 }
 
 void shutdown() {
-    user_service_->persist();
     delete (user_service_);
-
-    bill_service_->persist();
     delete (bill_service_);
 }
 

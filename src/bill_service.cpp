@@ -44,9 +44,3 @@ std::optional<bill> bill_service::get_bill(std::string phone_number) {
                ? std::make_optional(it->second)
                : std::nullopt;
 }
-
-void bill_service::persist() {
-}
-
-void bill_service::populate() {
-}
