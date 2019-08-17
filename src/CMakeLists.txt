@@ -1,6 +1,7 @@
 set (SRC
      bill.cpp
 	 bill_options.cpp
+	 bill_service.cpp
 	 rate.cpp
 	 user.cpp
 	 user_options.cpp
