@@ -22,16 +22,16 @@
 #include "user.h"
 
 class user_service {
-  public:
-    void add_user(user& user);
+public:
+    void add_user(const user& _user);
 
-    std::optional<user> remove_user(std::string phone_number);
+    std::optional<user> remove_user(const std::string& phone_number);
 
-    std::optional<user> get_user(std::string phone_number);
+    std::optional<user> get_user(const std::string& phone_number) const;
 
-    const std::map<std::string, user> all_users();
+    const std::map<std::string, user> all_users() const;
 
-  private:
+private:
     std::map<std::string, user> users_map_;
 };
 

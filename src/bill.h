@@ -22,18 +22,18 @@
 #include "rate.h"
 
 class bill {
-  public:
+public:
     bill(std::string phone_number, int calls, double data, int messages, rate rate)
         : phone_number_(phone_number), calls_(calls), data_(data), messages_(messages), rate_(rate) {
     }
 
     void compute_bill();
 
-    std::string phone_number() {
+    std::string phone_number() const {
         return phone_number_;
     }
 
-  private:
+private:
     std::string phone_number_;
     int calls_;
     double data_;

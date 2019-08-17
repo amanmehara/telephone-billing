@@ -23,18 +23,18 @@
 #include "rate.h"
 
 class bill_service {
-  public:
+public:
     bill_service(rate rate)
         : rate_(rate) {
     }
 
-    void add_bill(std::string phone_number, int calls, double data_usage, int messages);
+    void add_bill(const std::string& phone_number, int calls, double data_usage, int messages);
 
-    std::optional<bill> remove_bill(std::string phone_number);
+    std::optional<bill> remove_bill(const std::string& phone_number);
 
-    std::optional<bill> get_bill(std::string phone_number);
+    std::optional<bill> get_bill(const std::string& phone_number) const;
 
-  private:
+private:
     std::map<std::string, bill> bills_map_;
     rate rate_;
 };

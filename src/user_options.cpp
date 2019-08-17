@@ -92,7 +92,8 @@ void user_options::display_user() {
     if (optional_user.has_value()) {
         user user = optional_user.value();
         std::cout << user << "\n\n";
-    } else {
+    }
+    else {
         std::cout << "Not Found. \n\n";
     }
 }
@@ -123,7 +124,8 @@ void user_options::remove_user() {
     if (optional_user.has_value()) {
         user user = optional_user.value();
         std::cout << "Deleted User: " << user << "\n\n";
-    } else {
+    }
+    else {
         std::cout << "Not Found. \n\n";
     }
 }

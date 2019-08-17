@@ -19,7 +19,7 @@
 #include "user_service.h"
 
 class user_options {
-  public:
+public:
     user_options(const bill_service& bill_service, const user_service& user_service)
         : bill_service_(bill_service), user_service_(user_service) {
     }
@@ -34,7 +34,7 @@ class user_options {
 
     void remove_user();
 
-  private:
+private:
     bill_service bill_service_;
     user_service user_service_;
 };

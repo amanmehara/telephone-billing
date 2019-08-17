@@ -19,18 +19,18 @@
 #include <vector>
 
 class user {
-  public:
+public:
     user(std::string name, std::string phone_number, std::string city)
         : name_(name), phone_number_(phone_number), city_(city) {
     }
 
     friend std::ostream& operator<<(std::ostream& os, const user& user);
 
-    std::string phone_number() {
+    std::string phone_number() const {
         return phone_number_;
     }
 
-  private:
+private:
     std::string name_;
     std::string phone_number_;
     double due_;

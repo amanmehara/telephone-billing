@@ -15,32 +15,34 @@
 #include "bill_service.h"
 
 #include <optional>
+#include <stdexcept>
 #include <string>
 
 #include "bill.h"
 #include "rate.h"
 
-void bill_service::add_bill(std::string phone_number, int calls, double data, int messages) {
+void bill_service::add_bill(const std::string& phone_number, int calls, double data, int messages) {
     if (bills_map_.find(phone_number) != bills_map_.end()) {
         throw std::runtime_error("Bill already there.");
     }
     bills_map_.insert(std::make_pair<>(phone_number, bill(phone_number, calls, data, messages, rate_)));
 }
 
-std::optional<bill> bill_service::remove_bill(std::string phone_number) {
-    std::map<std::string, bill>::iterator it = bills_map_.find(phone_number);
+std::optional<bill> bill_service::remove_bill(const std::string& phone_number) {
+    auto it = bills_map_.find(phone_number);
     if (it != bills_map_.end()) {
-        bill bill = it->second;
+        auto _bill = it->second;
         bills_map_.erase(it);
-        return std::make_optional(bill);
-    } else {
+        return std::make_optional(_bill);
+    }
+    else {
         return std::nullopt;
     }
 }
 
-std::optional<bill> bill_service::get_bill(std::string phone_number) {
-    std::map<std::string, bill>::iterator it = bills_map_.find(phone_number);
+std::optional<bill> bill_service::get_bill(const std::string& phone_number) const {
+    auto it = bills_map_.find(phone_number);
     return it != bills_map_.end()
-               ? std::make_optional(it->second)
-               : std::nullopt;
+        ? std::make_optional(it->second)
+        : std::nullopt;
 }
