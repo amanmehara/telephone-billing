@@ -15,26 +15,47 @@
 #ifndef TELBILL_USER_H_
 #define TELBILL_USER_H_
 
+#include <memory>
 #include <string>
 #include <vector>
 
+#include "bill.h"
+
+namespace telbill {
+
 class user {
-public:
-    user(std::string name, std::string phone_number, std::string city)
-        : name_(name), phone_number_(phone_number), city_(city) {
+  public:
+    user(std::string name, std::string phone, std::string city)
+        : name_(name), phone_(phone), city_(city), due_(0)
+    {
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const user& user);
+    friend std::ostream& operator<<(std::ostream& os, const user& u);
 
-    std::string phone_number() const {
-        return phone_number_;
+    const std::string& get_phone() const
+    {
+        return phone_;
     }
 
-private:
+    void add_bill(std::shared_ptr<bill> b);
+
+    void remove_bill(std::shared_ptr<bill> b);
+
+    const std::shared_ptr<bill> get_bill(const int& month, const int& year);
+
+    const std::vector<std::shared_ptr<bill>>& get_bills() const
+    {
+        return bills_;
+    }
+
+  private:
     std::string name_;
-    std::string phone_number_;
-    double due_;
+    std::string phone_;
     std::string city_;
+    double due_;
+    std::vector<std::shared_ptr<bill>> bills_;
 };
+
+} // namespace telbill
 
 #endif // TELBILL_USER_H_

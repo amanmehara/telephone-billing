@@ -18,11 +18,13 @@
 #include "bill_service.h"
 #include "user_service.h"
 
+#include <memory>
+
+namespace telbill {
+
 class user_options {
-public:
-    user_options(const bill_service& bill_service, const user_service& user_service)
-        : bill_service_(bill_service), user_service_(user_service) {
-    }
+  public:
+    user_options(std::shared_ptr<user_service> user_service) : user_service_(user_service) {}
 
     void interact();
 
@@ -32,11 +34,10 @@ public:
 
     void display_all_users();
 
-    void remove_user();
-
-private:
-    bill_service bill_service_;
-    user_service user_service_;
+  private:
+    std::shared_ptr<user_service> user_service_;
 };
+
+} // namespace telbill
 
 #endif // TELBILL_USER_OPTIONS_H_

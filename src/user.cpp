@@ -14,13 +14,53 @@
 
 #include "user.h"
 
+#include <format>
 #include <iostream>
-#include <string>
+#include <stdexcept>
 
-std::ostream& operator<<(std::ostream& os, const user& user) {
-    os << std::string("{\"Name\":\"") << user.name_
-        << std::string("\",\"PhoneNumber\":\"") << user.phone_number_
-        << std::string("\",\"City\":\"") << user.city_
-        << std::string("\"}");
+namespace telbill {
+
+std::ostream& operator<<(std::ostream& os, const user& u)
+{
+    os << std::format("{{'name': '{}', 'phone': '{}', 'city': '{}'}}", u.name_, u.phone_, u.city_);
     return os;
 }
+
+void user::add_bill(std::shared_ptr<bill> b)
+{
+    if (b == nullptr) {
+        throw std::invalid_argument("Bill is null.");
+    }
+    if (b->get_phone() != phone_) {
+        throw std::invalid_argument("Phone number mismatch.");
+    }
+    bills_.push_back(b);
+}
+
+void user::remove_bill(std::shared_ptr<bill> b)
+{
+    if (b == nullptr) {
+        throw std::invalid_argument("Bill is null.");
+    }
+    if (b->get_phone() != phone_) {
+        throw std::invalid_argument("Phone number mismatch.");
+    }
+    for (auto it = bills_.begin(); it != bills_.end(); it++) {
+        if (*it == b) {
+            bills_.erase(it);
+            break;
+        }
+    }
+}
+
+const std::shared_ptr<bill> user::get_bill(const int& month, const int& year)
+{
+    for (const auto& bill : bills_) {
+        if (bill->get_bill_month() == month && bill->get_bill_year() == year) {
+            return bill;
+        }
+    }
+    return nullptr;
+}
+
+} // namespace telbill

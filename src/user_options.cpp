@@ -20,7 +20,10 @@
 #include "user.h"
 #include "user_service.h"
 
-void user_options::interact() {
+namespace telbill {
+
+void user_options::interact()
+{
     bool loop = true;
     while (loop) {
         std::cout << "User Options \n";
@@ -29,10 +32,8 @@ void user_options::interact() {
         std::cout << "3 -> Display All Users \n";
         std::cout << "4 -> Remove A User \n";
         std::cout << "_ -> Back to Home \n";
-
         char option;
         std::cin >> option;
-
         switch (option) {
         case '1':
             add_user();
@@ -43,9 +44,6 @@ void user_options::interact() {
         case '3':
             display_all_users();
             break;
-        case '4':
-            remove_user();
-            break;
         default:
             loop = false;
             break;
@@ -53,42 +51,32 @@ void user_options::interact() {
     }
 }
 
-void user_options::add_user() {
-
+void user_options::add_user()
+{
     std::cout << "Add User \n";
-
     std::cin.ignore();
-
     std::string name;
     std::cout << "Name: ";
     getline(std::cin, name);
-
-    std::string phone_number;
-    std::cout << "PhoneNumber: ";
-    getline(std::cin, phone_number);
-
+    std::string phone;
+    std::cout << "Phone: ";
+    getline(std::cin, phone);
     std::string city;
     std::cout << "City: ";
     getline(std::cin, city);
-
-    user user(name, phone_number, city);
-
-    user_service_.add_user(user);
-
+    user user(name, phone, city);
+    user_service_->add_user(user);
     std::cout << "User Added. \n\n";
 }
 
-void user_options::display_user() {
+void user_options::display_user()
+{
     std::cout << "Display User \n";
-
     std::cin.ignore();
-
-    std::string phone_number;
-    std::cout << "PhoneNumber: ";
-    getline(std::cin, phone_number);
-
-    std::optional<user> optional_user = user_service_.get_user(phone_number);
-
+    std::string phone;
+    std::cout << "Phone: ";
+    getline(std::cin, phone);
+    auto optional_user = user_service_->get_user(phone);
     if (optional_user.has_value()) {
         user user = optional_user.value();
         std::cout << user << "\n\n";
@@ -98,34 +86,13 @@ void user_options::display_user() {
     }
 }
 
-void user_options::display_all_users() {
+void user_options::display_all_users()
+{
     std::cout << "All Users \n";
-
-    std::map<std::string, user> users_map = user_service_.all_users();
-
-    for (std::map<std::string, user>::iterator it = users_map.begin(); it != users_map.end(); it++) {
-        std::cout << it->second << "\n";
+    for (const auto& [_, u] : user_service_->all_users()) {
+        std::cout << u << "\n";
     }
-
     std::cout << "That's All Folks. \n\n";
 }
 
-void user_options::remove_user() {
-    std::cout << "Remove User \n";
-
-    std::cin.ignore();
-
-    std::string phone_number;
-    std::cout << "PhoneNumber: ";
-    getline(std::cin, phone_number);
-
-    std::optional<user> optional_user = user_service_.remove_user(phone_number);
-
-    if (optional_user.has_value()) {
-        user user = optional_user.value();
-        std::cout << "Deleted User: " << user << "\n\n";
-    }
-    else {
-        std::cout << "Not Found. \n\n";
-    }
-}
+} // namespace telbill

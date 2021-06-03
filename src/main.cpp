@@ -13,54 +13,42 @@
 // limitations under the License.
 
 #include <iostream>
+#include <memory>
 
-#include "bill.h"
 #include "bill_options.h"
 #include "bill_service.h"
-#include "user.h"
+#include "rate.h"
 #include "user_options.h"
 #include "user_service.h"
 
-user_service* user_service_;
-bill_service* bill_service_;
-
-void initialize(rate rate) {
-    user_service_ = new user_service();
-    bill_service_ = new bill_service(rate);
-}
-
-void shutdown() {
-    delete (user_service_);
-    delete (bill_service_);
-}
-
-int main() {
-    rate rate(0, 0, 0);
-    initialize(rate);
-
+int main()
+{
+    using namespace telbill;
+    rate rate(1, 0.2, 2);
+    auto user_service_ = std::make_shared<user_service>(user_service());
+    auto bill_service_ = std::make_shared<bill_service>(bill_service(user_service_, rate));
+    auto user_options_ = std::make_shared<user_options>(user_options(user_service_));
+    auto bill_options_ = std::make_shared<bill_options>(bill_options(bill_service_));
     bool loop = true;
     while (loop) {
         std::cout << "Telephone Billing \n";
         std::cout << "1 -> User \n";
         std::cout << "2 -> Bill \n";
         std::cout << "_ -> Exit \n";
-
         char option;
         std::cin >> option;
-
         switch (option) {
         case '1':
-            user_options(*bill_service_, *user_service_).interact();
+            user_options_->interact();
             break;
         case '2':
+            bill_options_->interact();
             break;
         default:
             loop = false;
             break;
         }
     }
-
-    shutdown();
 
     return 0;
 }

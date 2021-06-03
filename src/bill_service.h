@@ -16,27 +16,40 @@
 #define TELBILL_BILL_SERVICE_H_
 
 #include <map>
-#include <optional>
+#include <memory>
 #include <string>
+#include <vector>
 
 #include "bill.h"
 #include "rate.h"
+#include "user_service.h"
+
+namespace telbill {
 
 class bill_service {
-public:
-    bill_service(rate rate)
-        : rate_(rate) {
+  public:
+    bill_service(std::shared_ptr<user_service> user_service, rate rate)
+        : user_service_(user_service), rate_(rate)
+    {
     }
 
-    void add_bill(const std::string& phone_number, int calls, double data_usage, int messages);
+    std::string add_bill(const std::string& phone, int month, int year, int calls, double data,
+                         int messages);
 
-    std::optional<bill> remove_bill(const std::string& phone_number);
+    std::shared_ptr<bill> remove_bill(const std::string& id);
 
-    std::optional<bill> get_bill(const std::string& phone_number) const;
+    std::shared_ptr<bill> get_bill(const std::string& id) const;
 
-private:
-    std::map<std::string, bill> bills_map_;
+    std::vector<std::shared_ptr<bill>> get_bills(const std::string& phone) const;
+
+    std::vector<std::shared_ptr<bill>> get_bills() const;
+
+  private:
+    std::map<std::string, std::shared_ptr<bill>> bills_map_;
     rate rate_;
+    std::shared_ptr<user_service> user_service_;
 };
+
+} // namespace telbill
 
 #endif // TELBILL_BILL_SERVICE_H_

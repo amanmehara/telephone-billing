@@ -14,35 +14,68 @@
 
 #include "bill_service.h"
 
+#include <memory>
 #include <optional>
 #include <stdexcept>
 #include <string>
 
 #include "bill.h"
-#include "rate.h"
 
-void bill_service::add_bill(const std::string& phone_number, int calls, double data, int messages) {
-    if (bills_map_.find(phone_number) != bills_map_.end()) {
-        throw std::runtime_error("Bill already there.");
-    }
-    bills_map_.insert(std::make_pair<>(phone_number, bill(phone_number, calls, data, messages, rate_)));
-}
+namespace telbill {
 
-std::optional<bill> bill_service::remove_bill(const std::string& phone_number) {
-    auto it = bills_map_.find(phone_number);
-    if (it != bills_map_.end()) {
-        auto _bill = it->second;
-        bills_map_.erase(it);
-        return std::make_optional(_bill);
+std::string bill_service::add_bill(const std::string& phone, int month, int year, int calls,
+                                   double data, int messages)
+{
+    if (user_service_->get_user(phone).has_value()) {
+        auto b = bill(phone, month, year, calls, data, messages, rate_);
+        if (bills_map_.find(b.get_id()) != bills_map_.end()) {
+            throw std::runtime_error("Bill already there.");
+        }
+        bills_map_[b.get_id()] = std::make_shared<bill>(b);
+        user_service_->add_bill(bills_map_[b.get_id()]);
+        return b.get_id();
     }
     else {
-        return std::nullopt;
+        throw std::runtime_error("Add the user first.");
     }
 }
 
-std::optional<bill> bill_service::get_bill(const std::string& phone_number) const {
-    auto it = bills_map_.find(phone_number);
-    return it != bills_map_.end()
-        ? std::make_optional(it->second)
-        : std::nullopt;
+std::shared_ptr<bill> bill_service::remove_bill(const std::string& id)
+{
+    auto it = bills_map_.find(id);
+    if (it != bills_map_.end()) {
+        user_service_->remove_bill(it->second);
+        auto bill = it->second;
+        bills_map_.erase(it);
+        return bill;
+    }
+    else {
+        return nullptr;
+    }
 }
+
+std::shared_ptr<bill> bill_service::get_bill(const std::string& id) const
+{
+    const auto& it = bills_map_.find(id);
+    return it != bills_map_.end() ? it->second : nullptr;
+}
+
+std::vector<std::shared_ptr<bill>> bill_service::get_bills(const std::string& phone) const
+{
+    auto user_optional = user_service_->get_user(phone);
+    if (user_optional.has_value()) {
+        return user_optional->get_bills();
+    }
+    return {};
+}
+
+std::vector<std::shared_ptr<bill>> bill_service::get_bills() const
+{
+    std::vector<std::shared_ptr<bill>> bills;
+    for (const auto& [_, bill] : bills_map_) {
+        bills.push_back(bill);
+    }
+    return bills;
+}
+
+} // namespace telbill

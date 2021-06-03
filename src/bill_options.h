@@ -15,4 +15,30 @@
 #ifndef TELBILL_BILL_OPTIONS_H_
 #define TELBILL_BILL_OPTIONS_H_
 
+#include "bill_service.h"
+
+#include <memory>
+
+namespace telbill {
+
+class bill_options {
+  public:
+    bill_options(std::shared_ptr<bill_service> bill_service) : bill_service_(bill_service) {}
+
+    void interact();
+
+    void add_bill();
+
+    void display_bill();
+
+    void display_user_bills();
+
+    void display_all_bills();
+
+  private:
+    std::shared_ptr<bill_service> bill_service_;
+};
+
+} // namespace telbill
+
 #endif // TELBILL_BILL_OPTIONS_H_

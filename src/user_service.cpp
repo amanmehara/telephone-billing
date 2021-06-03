@@ -20,33 +20,48 @@
 
 #include "user.h"
 
-void user_service::add_user(const user& _user) {
-    auto phone_number = _user.phone_number();
-    if (users_map_.find(phone_number) != users_map_.end()) {
+namespace telbill {
+
+void user_service::add_user(const user& u)
+{
+    auto phone = u.get_phone();
+    if (users_map_.find(phone) != users_map_.end()) {
         throw std::runtime_error("User already there.");
     }
-    users_map_.insert(std::make_pair<>(phone_number, _user));
+    users_map_.emplace(phone, u);
 }
 
-std::optional<user> user_service::remove_user(const std::string& phone_number) {
-    auto it = users_map_.find(phone_number);
-    if (it != users_map_.end()) {
-        auto _user = it->second;
-        users_map_.erase(it);
-        return std::make_optional(_user);
-    }
-    else {
-        return std::nullopt;
-    }
+std::optional<user> user_service::get_user(const std::string& phone) const
+{
+    auto it = users_map_.find(phone);
+    return it != users_map_.end() ? std::make_optional(it->second) : std::nullopt;
 }
 
-std::optional<user> user_service::get_user(const std::string& phone_number) const {
-    auto it = users_map_.find(phone_number);
-    return it != users_map_.end()
-        ? std::make_optional(it->second)
-        : std::nullopt;
-}
-
-const std::map<std::string, user> user_service::all_users() const {
+const std::map<std::string, user> user_service::all_users() const
+{
     return users_map_;
 }
+
+void user_service::add_bill(std::shared_ptr<bill> b)
+{
+    if (b == nullptr) {
+        throw std::invalid_argument("Bill is null.");
+    }
+    auto it = users_map_.find(b->get_phone());
+    if (it != users_map_.end()) {
+        it->second.add_bill(b);
+    }
+}
+
+void user_service::remove_bill(std::shared_ptr<bill> b)
+{
+    if (b == nullptr) {
+        throw std::invalid_argument("Bill is null.");
+    }
+    auto it = users_map_.find(b->get_phone());
+    if (it != users_map_.end()) {
+        it->second.remove_bill(b);
+    }
+}
+
+} // namespace telbill

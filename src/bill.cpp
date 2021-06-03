@@ -14,8 +14,23 @@
 
 #include "bill.h"
 
-#include "rate.h"
+#include <format>
+#include <ostream>
 
-void bill::compute_bill() {
-    bill_amount_ = calls_ * rate_.call_rate() + data_ * rate_.data_rate() + messages_ * rate_.message_rate();
+namespace telbill {
+
+std::ostream& operator<<(std::ostream& os, const bill& b)
+{
+    os << std::format(
+        "{{'id': '{}', 'calls': '{}', 'data': '{}', 'messages': '{}', 'amount': '{}'}}", b.id_,
+        b.calls_, b.data_, b.messages_, b.bill_amount_);
+    return os;
 }
+
+void bill::compute_bill()
+{
+    bill_amount_ =
+        calls_ * rate_.call_rate() + data_ * rate_.data_rate() + messages_ * rate_.message_rate();
+}
+
+} // namespace telbill

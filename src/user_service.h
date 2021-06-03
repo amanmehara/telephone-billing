@@ -15,24 +15,30 @@
 #ifndef TELBILL_USER_SERVICE_H_
 #define TELBILL_USER_SERVICE_H_
 
+#include "user.h"
+
 #include <map>
 #include <optional>
 #include <string>
 
-#include "user.h"
+namespace telbill {
 
 class user_service {
-public:
-    void add_user(const user& _user);
+  public:
+    void add_user(const user& u);
 
-    std::optional<user> remove_user(const std::string& phone_number);
-
-    std::optional<user> get_user(const std::string& phone_number) const;
+    std::optional<user> get_user(const std::string& phone) const;
 
     const std::map<std::string, user> all_users() const;
 
-private:
+    void add_bill(std::shared_ptr<bill> b);
+
+    void remove_bill(std::shared_ptr<bill> b);
+
+  private:
     std::map<std::string, user> users_map_;
 };
+
+} // namespace telbill
 
 #endif // TELBILL_USER_SERVICE_H_

@@ -15,28 +15,36 @@
 #ifndef TELBILL_RATE_H_
 #define TELBILL_RATE_H_
 
+namespace telbill {
+
 class rate {
-public:
+  public:
     rate(double call_rate, double data_rate, double message_rate)
-        : call_rate_(call_rate), data_rate_(data_rate), message_rate_(message_rate) {
+        : call_rate_(call_rate), data_rate_(data_rate), message_rate_(message_rate)
+    {
     }
 
-    double call_rate() const {
+    const double& call_rate() const
+    {
         return call_rate_;
     }
 
-    double data_rate() const {
+    const double& data_rate() const
+    {
         return data_rate_;
     }
 
-    double message_rate() const {
+    const double& message_rate() const
+    {
         return message_rate_;
     }
 
-private:
+  private:
     double call_rate_;
     double data_rate_;
     double message_rate_;
 };
+
+} // namespace telbill
 
 #endif // TELBILL_RATE_H_
